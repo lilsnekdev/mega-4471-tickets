@@ -39,11 +39,13 @@ Not one issue. Three: the shared parser, the booking-v3 form hint, and a one-day
 
 ## The numbers
 
-Of the 412 unique reports merged into #4471 (the export carries 427 rows; 15 are duplicates):
+Of the 412 unique reports merged into #4471 (the export carries 427 rows; 15 are duplicates), counted as the desk counts, by where each report is filed:
 
-- 374 reports — the parser problem.
+- 379 reports — the parser problem. This is the desk's own counting: the 5 reports the desk
+  reads as a one-day move are filed under parser by tenant and footnoted here, not counted apart.
 - 33 reports — the form-hint problem (tenants alder.physio, copper.studio, pale.harbour, all via form).
-- 5 reports — the one-day move (the desk's `oneDayMove` notes).
+- 5 reports — the one-day move (the desk's `oneDayMove` notes) — a distinct problem and a distinct
+  fix, but counted under the parser ticket above in the desk's view.
 
 Intake's `intakeTag` guess disagrees with the real cause on 38 of them (23 tagged `hint` are
 parser; 15 tagged `parser` are hint): a browser-locale guess cannot decide this — the tenant's

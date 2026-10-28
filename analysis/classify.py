@@ -49,3 +49,5 @@ for k, v in out.items():
     print(f"{k}: {len(v)}")
 print("total:", sum(len(v) for v in out.values()), "unique reports")
 assert sum(len(v) for v in out.values()) == 412
+print("desk's view (counted where filed): parser =", len(out["parser"]) + len(out["one-day-move"]),
+      "(footnote: 5 read as a one-day move) | hint =", len(out["hint"]))

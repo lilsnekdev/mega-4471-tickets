@@ -8,7 +8,7 @@ own GitHub issue and report count.
 
 | Problem | Reports | Issue |
 |---|---|---|
-| Parser reads dates month-first for day-first tenants | 374 | [the parser issue](../../issues/1) |
+| Parser reads dates month-first for day-first tenants | 379 (incl. the 5 one-day moves, footnoted) | [the parser issue](../../issues/1) |
 | booking-v3 form hint says MM/DD/YYYY but the form reads day-first | 33 | [the form-hint issue](../../issues/2) |
 | One-day move (suspected timezone handling) | 5 | [the one-day-move issue](../../issues/3) |
 

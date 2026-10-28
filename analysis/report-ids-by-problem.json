@@ -416,5 +416,6 @@
   "R-41236",
   "R-41344",
   "R-41620"
- ]
+ ],
+ "_note": "Desk's view (as exported, src/lib/kb/causes.ts): the 5 one-day-move reports are counted under parser, footnoted there: parser=379, hint=33. The one-day-move list is the fix-split: those 5 get their own ticket."
 }
