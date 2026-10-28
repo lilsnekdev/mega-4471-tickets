@@ -20,53 +20,49 @@
 </head>
 <body>
 <main>
-<h1>#4471 · one ticket, three problems</h1>
-<p class="meta">owner: harness of Szymon Tarczewski · status: proposed · reviewed: 2026-10-28<br/>
-signature: harness of Szymon Tarczewski · GLM-5.2 · 2026-10-28</p>
-
-<p>The desk closed <strong>#4471</strong> as one known issue: <em>the parser reads dates month first</em>. Working the
-export shows <strong>three separate problems</strong> behind the 412 reports. Each needs its own ticket and
-its own fix; one queued fix will not cover them.</p>
-
+<p>*Rendered copy of `4471-page.svx` (frontmatter: `owner: harness of Szymon Tarczewski`,</p>
+<p>`status: known`, `reviewed: 2026-10-28`, `signature: harness of Szymon Tarczewski · GLM-5.2 · 2026-10-28`).</p>
+<p>Desk ref: <strong>DR-V441-29GA</strong>.*</p>
+<p>The desk closed <strong>#4471</strong> as one known issue: <em>the parser reads dates month first</em>. Working the</p>
+<p>export showed <strong>three separate problems</strong> behind the 412 reports, each with its own ticket in</p>
+<p><a href="https://github.com/lilsnekdev/mega-4471-tickets">lilsnekdev/mega-4471-tickets</a>:</p>
 <div class="callout">Not one issue. Three: the shared parser, the booking-v3 form hint, and a one-day move.</div>
-
-<h2>The three problems</h2>
+<h2>The tickets</h2>
 <ol>
-<li><strong>Parser — month-first for day-first tenants.</strong> The shared date parser reads every date month
-first. Every tenant whose locale writes the day first gets month and day flipped, on every
-channel. This is the one the desk already knows, and it is only this one the queued fix covers.</li>
-<li><strong>Form hint — booking-v3 says MM/DD, reads day-first.</strong> On the booking-v3 form the hint under
-the date field says <code>MM/DD/YYYY</code>, so tenants type the month first — and the form then reads it
-the tenant's day-first way. Different bug, three tenants, form channel only. Reports of this
-were merged into #4471 under the same subject lines.</li>
-<li><strong>One-day move.</strong> A handful of reports are not swaps at all: dates moved by one day, a weekday
-shift, an invite that arrived before the booking was made, and one meeting that showed on
-different days in different timezones. The desk notes read these separately; they are filed
-here so they stop hiding under the parser.</li>
+<li><strong>Parser — month-first for day-first tenants.</strong></li>
+<p>   <a href="https://github.com/lilsnekdev/mega-4471-tickets/issues/1">Ticket #1 — 379 reports</a>. The shared</p>
+<p>   date parser reads every date month first; every tenant whose locale writes the day first gets</p>
+<p>   month and day flipped, on every channel. Engineering's update (05 Oct): <strong>FIXED</strong> —</p>
+<p>   <code>fix(dates): parse dd/mm for eu locales</code>. Closed as completed.</p>
+<li><strong>Form hint — booking-v3 says MM/DD, reads day-first.</strong></li>
+<p>   <a href="https://github.com/lilsnekdev/mega-4471-tickets/issues/2">Ticket #2 — 33 reports</a>. The booking-v3</p>
+<p>   hint under the date field says <code>MM/DD/YYYY</code>, tenants type the month first, and the form reads it</p>
+<p>   the tenant's day-first way. Different bug; three tenants (alder.physio, copper.studio,</p>
+<p>   pale.harbour), form channel only. Engineering's update (05 Oct): <strong>WON'T FIX</strong> — the booking-v3</p>
+<p>   form is retired. Closed as not planned.</p>
+<li><strong>One-day move.</strong></li>
+<p>   <a href="https://github.com/lilsnekdev/mega-4471-tickets/issues/3">Ticket #3 — 5 reports</a>. Not swaps at</p>
+<p>   all: dates moved by one day, a weekday shift, an invite that arrived before the booking was</p>
+<p>   made, and one meeting on different days in different timezones. These are the desk's</p>
+<p>   <code>oneDayMove</code> notes. Closed as not planned with the parent, the parser fix shipped and #4471 closed.</p>
 </ol>
-
 <h2>The numbers</h2>
 <p>Of the 412 unique reports merged into #4471 (the export carries 427 rows; 15 are duplicates), counted as the desk counts, by where each report is filed:</p>
-<ul>
-<li><strong>379 reports — the parser problem.</strong> This is the desk's own counting: the 5 reports the desk
-reads as a one-day move are filed under parser by tenant and footnoted here, not counted apart.</li>
-<li><strong>33 reports — the form-hint problem</strong> (tenants alder.physio, copper.studio, pale.harbour, all via form).</li>
-<li><strong>5 reports — the one-day move</strong> (the desk's <code>oneDayMove</code> notes) — a distinct problem and a distinct
-fix, but counted under the parser ticket above in the desk's view.</li>
-</ul>
-<p>Intake's <code>intakeTag</code> guess disagrees with the real cause on 38 of them (23 tagged <code>hint</code> are
-parser; 15 tagged <code>parser</code> are hint): a browser-locale guess cannot decide this — the tenant's
-locale, channel and form do. Decision 0001 (merge on subject line alone) is what folded three
-problems into one ticket.</p>
-<p>Report ids per problem: <code>analysis/report-ids-by-problem.json</code>.</p>
-
+<li>379 reports — the parser problem. This is the desk's own counting: the 5 reports the desk</li>
+<p>  reads as a one-day move are filed under parser by tenant and footnoted here, not counted apart.</p>
+<li>33 reports — the form-hint problem.</li>
+<li>5 reports — the one-day move, a distinct problem with its own ticket, counted under the</li>
+<p>  parser ticket above in the desk's view.</p>
+<p>Intake's <code>intakeTag</code> guess disagrees with the real cause on 38 of them (23 tagged <code>hint</code> are</p>
+<p>parser; 15 tagged <code>parser</code> are hint): a browser-locale guess cannot decide this — the tenant's</p>
+<p>locale, channel and form do. Decision 0001 (merge on subject line alone) is what folded three</p>
+<p>problems into one ticket.</p>
+<p>Report ids per problem: <code>analysis/report-ids-by-problem.json</code> in the repo this page ships with.</p>
 <h2>Lessons</h2>
-<ul>
 <li>One ticket per problem, counted per problem. A subject line cannot tell a hint bug from a parser bug.</li>
 <li>Two guesses about the same report (intake's and the tenant's) disagree; only one of them pays for the merge.</li>
-</ul>
-
-<p class="stamp">desk ref <b>DR-V441-29GA</b></p>
+<p>desk ref <strong>DR-V441-29GA</strong></p>
+<hr/><p class="stamp">desk ref <b>DR-V441-29GA</b></p>
 </main>
 </body>
 </html>
