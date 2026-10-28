@@ -16,18 +16,18 @@ own GitHub issue and report count.
 
 ## What is in here
 
-- `4471-page.svx` — the kb page, signed (frontmatter `signature` + `<RenderStamp {signature} />`, desk ref DR-V441-29GA). It is the kb's page for the incident, at `src/routes/kb/incidents/4471/+page.svx` (the desk's old one-issue page it replaces, kept in git history).
+- `4471-page.svx` — the kb page, signed (frontmatter `signature` + `<RenderStamp {signature} />`, desk ref DR-V441-29GA). It is the kb's page for the incident, at `support-kb/src/routes/kb/incidents/4471/+page.svx` (the desk's old one-issue page it replaces, kept in git history).
 - `4471-page.md` (and `4471-page.html`) — that page rendered, for the desk to read without running the kb.
 - `issues/*.md` — the three tickets, as filed.
-- `src/` — the desk's kb export (untouched) plus the incident page replaced with our
-  signed page at `src/routes/kb/incidents/4471/+page.svx`, signed per kb conventions
-  (`frontmatter signature` + `<RenderStamp {signature} />`, desk ref DR-V441-29GA).
+- `support-kb/` — the desk's kb export, in its exported layout (root folder `support-kb/`), with the
+  incident page replaced by our signed page at `support-kb/src/routes/kb/incidents/4471/+page.svx`,
+  signed per kb conventions (`frontmatter signature` + `<RenderStamp {signature} />`, desk ref DR-V441-29GA).
 - `analysis/report-ids-by-problem.json` — every report id, per problem, so each count can be checked.
-- `analysis/classify.py` — the classification script (tenant locale + channel + form, per `src/lib/kb/causes.ts` logic).
+- `analysis/classify.py` — the classification script (tenant locale + channel + form, per `support-kb/src/lib/kb/causes.ts` logic).
 
 ## How the split was decided
 
-The kb's own logic (`src/lib/kb/causes.ts`) says the cause depends on the **tenant** (locale, booking
+The kb's own logic (`support-kb/src/lib/kb/causes.ts`) says the cause depends on the **tenant** (locale, booking
 form), not on the reporter's browser or the subject line. Following it: a day-first tenant hit by the
 shared month-first parser is the `parser` cause; the same tenant typing what the booking-v3 hint
 (`MM/DD/YYYY`) tells them, on the form channel, is the `hint` cause — a different bug. The desk's
