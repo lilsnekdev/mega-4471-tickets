@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>#4471 · one ticket, three problems</title>
+<style>
+  :root { --ink:#1c1b18; --muted:#6b6862; --accent:#7a3b1f; --warn:#8a5a00; --bg:#f4f3ee; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.6 Georgia,serif; }
+  main { max-width:44rem; margin:0 auto; padding:3rem 1.25rem 5rem; }
+  h1 { font-size:1.6rem; line-height:1.25; margin:0 0 1.5rem; }
+  h2 { font-size:1.15rem; margin-top:2.2rem; }
+  code { font-family:ui-monospace,monospace; font-size:.9em; background:#e9e7e0; padding:.1em .35em; border-radius:3px; }
+  .callout { border-left:4px solid var(--accent); background:#efe9df; padding:.75rem 1rem; margin:1.5rem 0; }
+  .stamp { margin-top:2rem; font:0.85rem ui-monospace,monospace; color:var(--muted); }
+  .stamp b { color:var(--accent); letter-spacing:.04em; }
+  .meta { color:var(--muted); font:0.85rem ui-monospace,monospace; margin-bottom:2rem; }
+  ol li { margin:.5rem 0; }
+</style>
+</head>
+<body>
+<main>
+<h1>#4471 · one ticket, three problems</h1>
+<p class="meta">owner: harness of Szymon Tarczewski · status: proposed · reviewed: 2026-10-28<br/>
+signature: harness of Szymon Tarczewski · GLM-5.2 · 2026-10-28</p>
+
+<p>The desk closed <strong>#4471</strong> as one known issue: <em>the parser reads dates month first</em>. Working the
+export shows <strong>three separate problems</strong> behind the 412 reports. Each needs its own ticket and
+its own fix; one queued fix will not cover them.</p>
+
+<div class="callout">Not one issue. Three: the shared parser, the booking-v3 form hint, and a one-day move.</div>
+
+<h2>The three problems</h2>
+<ol>
+<li><strong>Parser — month-first for day-first tenants.</strong> The shared date parser reads every date month
+first. Every tenant whose locale writes the day first gets month and day flipped, on every
+channel. This is the one the desk already knows, and it is only this one the queued fix covers.</li>
+<li><strong>Form hint — booking-v3 says MM/DD, reads day-first.</strong> On the booking-v3 form the hint under
+the date field says <code>MM/DD/YYYY</code>, so tenants type the month first — and the form then reads it
+the tenant's day-first way. Different bug, three tenants, form channel only. Reports of this
+were merged into #4471 under the same subject lines.</li>
+<li><strong>One-day move.</strong> A handful of reports are not swaps at all: dates moved by one day, a weekday
+shift, an invite that arrived before the booking was made, and one meeting that showed on
+different days in different timezones. The desk notes read these separately; they are filed
+here so they stop hiding under the parser.</li>
+</ol>
+
+<h2>The numbers</h2>
+<p>Of the 412 unique reports merged into #4471 (the export carries 427 rows; 15 are duplicates), counted as the desk counts, by where each report is filed:</p>
+<ul>
+<li><strong>379 reports — the parser problem.</strong> This is the desk's own counting: the 5 reports the desk
+reads as a one-day move are filed under parser by tenant and footnoted here, not counted apart.</li>
+<li><strong>33 reports — the form-hint problem</strong> (tenants alder.physio, copper.studio, pale.harbour, all via form).</li>
+<li><strong>5 reports — the one-day move</strong> (the desk's <code>oneDayMove</code> notes) — a distinct problem and a distinct
+fix, but counted under the parser ticket above in the desk's view.</li>
+</ul>
+<p>Intake's <code>intakeTag</code> guess disagrees with the real cause on 38 of them (23 tagged <code>hint</code> are
+parser; 15 tagged <code>parser</code> are hint): a browser-locale guess cannot decide this — the tenant's
+locale, channel and form do. Decision 0001 (merge on subject line alone) is what folded three
+problems into one ticket.</p>
+<p>Report ids per problem: <code>analysis/report-ids-by-problem.json</code>.</p>
+
+<h2>Lessons</h2>
+<ul>
+<li>One ticket per problem, counted per problem. A subject line cannot tell a hint bug from a parser bug.</li>
+<li>Two guesses about the same report (intake's and the tenant's) disagree; only one of them pays for the merge.</li>
+</ul>
+
+<p class="stamp">desk ref <b>DR-V441-29GA</b></p>
+</main>
+</body>
+</html>
