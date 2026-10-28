@@ -12,6 +12,11 @@ own GitHub issue and report count.
 | booking-v3 form hint says MM/DD/YYYY but the form reads day-first | 33 | [the form-hint issue](../../issues/2) |
 | One-day move (suspected timezone handling) | 5 | [the one-day-move issue](../../issues/3) |
 
+## Your page
+
+- [the kb page, signed (.svx)](./4471-page.svx) — also the kb's page for the incident at [`support-kb/src/routes/kb/incidents/4471/+page.svx`](./support-kb/src/routes/kb/incidents/4471/+page.svx)
+- [the page as the desk will see it (Markdown)](./4471-page.md) · [same as HTML](./4471-page.html)
+
 374 + 33 + 5 = 412 unique reports. The export carries 427 rows; 15 are duplicated report ids.
 
 ## What is in here
