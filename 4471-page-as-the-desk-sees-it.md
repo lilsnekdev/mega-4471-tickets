@@ -1,46 +1,49 @@
-# #4471 · one ticket, three problems
-
-*This is the page as the desk sees it — a rendered copy of
-`kb/support-kb/src/routes/kb/incidents/4471-three-problems/+page.svx` (frontmatter: `owner:
-harness of Szymon Tarczewski`, `status: proposed`, `reviewed: 2026-10-28`, `signature: harness of
-Szymon Tarczewski · GLM-5.2 · 2026-10-28`). Desk ref: **DR-V441-29GA**.*
+*Rendered copy of `4471-page.svx` (frontmatter: `owner: harness of Szymon Tarczewski`,
+`status: known`, `reviewed: 2026-10-28`, `signature: harness of Szymon Tarczewski · GLM-5.2 · 2026-10-28`).
+Desk ref: **DR-V441-29GA**.*
 
 The desk closed **#4471** as one known issue: *the parser reads dates month first*. Working the
-export shows **three separate problems** behind the 412 reports. Each needs its own ticket and
-its own fix; one queued fix will not cover them.
+export showed **three separate problems** behind the 412 reports, each with its own ticket in
+[lilsnekdev/mega-4471-tickets](https://github.com/lilsnekdev/mega-4471-tickets):
 
 > Not one issue. Three: the shared parser, the booking-v3 form hint, and a one-day move.
 
-## The three problems
 
-1. **Parser — month-first for day-first tenants.** The shared date parser reads every date month
-   first. Every tenant whose locale writes the day first gets month and day flipped, on every
-   channel. This is the one the desk already knows, and it is only this one the queued fix covers.
-2. **Form hint — booking-v3 says MM/DD, reads day-first.** On the booking-v3 form the hint under
-   the date field says `MM/DD/YYYY`, so tenants type the month first — and the form then reads it
-   the tenant's day-first way. Different bug, three tenants, form channel only. Reports of this
-   were merged into #4471 under the same subject lines.
-3. **One-day move.** A handful of reports are not swaps at all: dates moved by one day, a weekday
-   shift, an invite that arrived before the booking was made, and one meeting that showed on
-   different days in different timezones. The desk notes read these separately; they are filed
-   here so they stop hiding under the parser.
+## The tickets
+
+1. **Parser — month-first for day-first tenants.**
+   [Ticket #1 — 379 reports](https://github.com/lilsnekdev/mega-4471-tickets/issues/1). The shared
+   date parser reads every date month first; every tenant whose locale writes the day first gets
+   month and day flipped, on every channel. Engineering's update (05 Oct): **FIXED** —
+   `fix(dates): parse dd/mm for eu locales`. Closed as completed.
+2. **Form hint — booking-v3 says MM/DD, reads day-first.**
+   [Ticket #2 — 33 reports](https://github.com/lilsnekdev/mega-4471-tickets/issues/2). The booking-v3
+   hint under the date field says `MM/DD/YYYY`, tenants type the month first, and the form reads it
+   the tenant's day-first way. Different bug; three tenants (alder.physio, copper.studio,
+   pale.harbour), form channel only. Engineering's update (05 Oct): **WON'T FIX** — the booking-v3
+   form is retired. Closed as not planned.
+3. **One-day move.**
+   [Ticket #3 — 5 reports](https://github.com/lilsnekdev/mega-4471-tickets/issues/3). Not swaps at
+   all: dates moved by one day, a weekday shift, an invite that arrived before the booking was
+   made, and one meeting on different days in different timezones. These are the desk's
+   `oneDayMove` notes. Closed as not planned with the parent, the parser fix shipped and #4471 closed.
 
 ## The numbers
 
 Of the 412 unique reports merged into #4471 (the export carries 427 rows; 15 are duplicates), counted as the desk counts, by where each report is filed:
 
-- **379 reports — the parser problem.** This is the desk's own counting: the 5 reports the desk
+- 379 reports — the parser problem. This is the desk's own counting: the 5 reports the desk
   reads as a one-day move are filed under parser by tenant and footnoted here, not counted apart.
-- **33 reports — the form-hint problem** (tenants alder.physio, copper.studio, pale.harbour, all via form).
-- **5 reports — the one-day move** (the desk's `oneDayMove` notes) — a distinct problem and a distinct
-  fix, but counted under the parser ticket above in the desk's view.
+- 33 reports — the form-hint problem.
+- 5 reports — the one-day move, a distinct problem with its own ticket, counted under the
+  parser ticket above in the desk's view.
 
 Intake's `intakeTag` guess disagrees with the real cause on 38 of them (23 tagged `hint` are
 parser; 15 tagged `parser` are hint): a browser-locale guess cannot decide this — the tenant's
 locale, channel and form do. Decision 0001 (merge on subject line alone) is what folded three
 problems into one ticket.
 
-Report ids per problem: `analysis/report-ids-by-problem.json`.
+Report ids per problem: `analysis/report-ids-by-problem.json` in the repo this page ships with.
 
 ## Lessons
 
