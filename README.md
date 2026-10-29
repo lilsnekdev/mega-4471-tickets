@@ -21,12 +21,12 @@ own GitHub issue and report count.
 
 ## What is in here
 
-- `4471-page.svx` — the kb page, signed (frontmatter `signature` + `<RenderStamp {signature} />`, desk ref DR-V441-29GA). It is the kb's page for the incident, at `support-kb/src/routes/kb/incidents/4471/+page.svx` (the desk's old one-issue page it replaces, kept in git history).
+- `4471-page.svx` — the kb page, signed (frontmatter `signature` + `<RenderStamp {signature} />`, desk ref DR-7DAD-82WZ). It is the kb's page for the incident, at `support-kb/src/routes/kb/incidents/4471/+page.svx` (the desk's old one-issue page it replaces, kept in git history).
 - `4471-page.md` (and `4471-page.html`) — that page rendered, for the desk to read without running the kb.
 - `issues/*.md` — the three tickets, as filed.
 - `support-kb/` — the desk's kb export, in its exported layout (root folder `support-kb/`), with the
   incident page replaced by our signed page at `support-kb/src/routes/kb/incidents/4471/+page.svx`,
-  signed per kb conventions (`frontmatter signature` + `<RenderStamp {signature} />`, desk ref DR-V441-29GA).
+  signed per kb conventions (`frontmatter signature` + `<RenderStamp {signature} />`, desk ref DR-7DAD-82WZ).
 - `analysis/report-ids-by-problem.json` — every report id, per problem, so each count can be checked.
 - `analysis/classify.py` — the classification script (tenant locale + channel + form, per `support-kb/src/lib/kb/causes.ts` logic).
 
